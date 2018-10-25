@@ -125,11 +125,7 @@ def num_points_scored(player)
       if data2 == :players
         info.each do |team_player, stats|
           if player == team_player
-            stats.each do |stat, value|
-               if stat == :points
-                 points = value
-               end
-            end
+            points = stats[:points]
           end
         end
       end
