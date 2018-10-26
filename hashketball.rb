@@ -179,7 +179,6 @@ end
 def player_stats(player_name)
   game_hash.find do |location, team_data|
     team_data[:players][player_name]
-      
   end
 end
 
