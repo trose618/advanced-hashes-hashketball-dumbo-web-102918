@@ -121,14 +121,8 @@ end
 def num_points_scored(player)
   points = nil
   game_hash.each do |team, data|
-    data.each do |data2, info|
-      if data2 == :players
-        info.each do |team_player, stats|
-          if player == team_player
-            points = stats[:points]
-          end
-        end
-      end
+    if data[:players][player]
+      points = data[:players][player][:points]
     end
   end
   points
@@ -137,18 +131,8 @@ end
 def shoe_size(player)
   size = nil
   game_hash.each do |team, data|
-    data.each do |data2, info|
-      if data2 == :players
-        info.each do |team_player, stats|
-          if player == team_player
-            stats.each do |stat, value|
-               if stat == :shoe
-                 size = value
-               end
-            end
-          end
-        end
-      end
+    if data[:players][player]
+      size = data[:players][player][:shoe]
     end
   end
   size
@@ -157,15 +141,8 @@ end
 def team_colors(team_name)
   colors = []
   game_hash.each do |location, team_data|
-    array_of_team_data_values = team_data.values
-    array_of_team_data_values.each do |values|
-      if values == team_name
-        team_data.each do |data, info|
-          if data == :colors
-            colors = info
-          end
-        end
-      end
+    if team_data[:team_name] == team_name
+      colors = team_data[:colors]
     end
   end
   colors
@@ -186,40 +163,27 @@ end
 def player_numbers(team_name)
   numbers = []
   game_hash.each do |location, team_data|
-    array_of_team_data_values = team_data.values
-    array_of_team_data_values.each do |values|
-      if values == team_name
-        team_data.each do |data, info|
-          if data == :players
-            info.each do |name, stats|
-              stats.each do |stat, value|
-                if stat == :number
-                  numbers << value
-                end
-              end
+      if team_data[:team_name] == team_name
+        if team_data[:players]
+          team_data[:players].each do |name, stats|
+            if stats[:number]
+              numbers << stats[:number]
             end
           end
         end
       end
     end
-  end
-  numbers
+    numbers
 end
 
 def player_stats(player_name)
-  player_statistics = {}
+  player_stats = {}
   game_hash.each do |location, team_data|
-    team_data.each do |data, info|
-      if data == :players
-        info.each do |player, stats|
-          if player == player_name
-            player_statistics = stats
-          end
-        end
-      end
+    if team_data[:players][player_name]
+      player_stats = team_data[:players][player_name]
     end
   end
-  player_statistics
+  player_stats
 end
 
 def big_shoe_rebounds
@@ -227,18 +191,14 @@ def big_shoe_rebounds
   big_foot_shoe_size = 0
   
   game_hash.each do |location, team_data|
-    team_data.each do |data, info|
-      if data == :players
-        info.each do |player, stats|
-          array_of_player_stat_values = stats.values
-          if array_of_player_stat_values[1] > big_foot_shoe_size
-            big_foot_shoe_size = array_of_player_stat_values[1]
-            rebounds_of_big_foot = array_of_player_stat_values[3]
-          end
+    team_data[:players].each do |player, stats|
+      array_of_player_stat_values = stats.values
+        if array_of_player_stat_values[1] > big_foot_shoe_size
+          big_foot_shoe_size = array_of_player_stat_values[1]
+          rebounds_of_big_foot = array_of_player_stat_values[3]
         end
       end
     end
-  end
   rebounds_of_big_foot
 end
 
@@ -270,7 +230,7 @@ def most_points_scored
       if data == :players
         info.each do |player, stats|
           stats.each do |stat, value|
-            if stat == : :points
+            if stat == :points
               home_points += value if location == :home
               away_points += value if location == :away
             end
