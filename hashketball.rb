@@ -183,6 +183,7 @@ def player_stats(player_name)
       player_stats = team_data[:players][player_name]
     end
   end
+  player_stats
 end
 
 def big_shoe_rebounds
