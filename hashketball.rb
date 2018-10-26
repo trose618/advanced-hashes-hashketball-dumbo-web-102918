@@ -181,6 +181,7 @@ def player_stats(player_name)
   game_hash.find do |location, team_data|
     if team_data[:player][player_name]
       team_data[:player][player_name]
+    end
   end
   player_statistics
 end
