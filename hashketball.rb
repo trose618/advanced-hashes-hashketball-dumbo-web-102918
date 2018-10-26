@@ -171,6 +171,7 @@ def player_numbers(team_name)
             info.each do |name, stats|
               if stats[:number]
                 numbers << stats[:number]
+              end
             end
           end
         end
