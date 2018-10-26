@@ -121,14 +121,8 @@ end
 def num_points_scored(player)
   points = nil
   game_hash.each do |team, data|
-    data.each do |data2, info|
-      if data2 == :players
-        info.each do |team_player, stats|
-          if player == team_player
-            points = stats[:points]
-          end
-        end
-      end
+    if data[:players][player]
+      points = data[:players][player][:points]
     end
   end
   points
@@ -138,6 +132,7 @@ def shoe_size(player)
   size = nil
   game_hash.each do |team, data|
     data.each do |data2, info|
+      binding.pry
       if data2 == :players
         info.each do |team_player, stats|
           if player == team_player
@@ -270,7 +265,7 @@ def most_points_scored
       if data == :players
         info.each do |player, stats|
           stats.each do |stat, value|
-            if stat == : :points
+            if stat == :points
               home_points += value if location == :home
               away_points += value if location == :away
             end
