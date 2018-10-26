@@ -131,19 +131,8 @@ end
 def shoe_size(player)
   size = nil
   game_hash.each do |team, data|
-    data.each do |data2, info|
-      binding.pry
-      if data2 == :players
-        info.each do |team_player, stats|
-          if player == team_player
-            stats.each do |stat, value|
-               if stat == :shoe
-                 size = value
-               end
-            end
-          end
-        end
-      end
+    if data[:players][player]
+      points = data[:players][player][:shoe]
     end
   end
   size
