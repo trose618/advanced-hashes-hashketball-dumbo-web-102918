@@ -132,7 +132,7 @@ def shoe_size(player)
   size = nil
   game_hash.each do |team, data|
     if data[:players][player]
-      points = data[:players][player][:shoe]
+      size = data[:players][player][:shoe]
     end
   end
   size
