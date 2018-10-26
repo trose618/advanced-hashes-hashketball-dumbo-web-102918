@@ -177,13 +177,11 @@ def player_numbers(team_name)
 end
 
 def player_stats(player_name)
-  player_statistics = {}
   game_hash.find do |location, team_data|
     if team_data[:player][player_name]
       team_data[:player][player_name]
     end
   end
-  player_statistics
 end
 
 def big_shoe_rebounds
