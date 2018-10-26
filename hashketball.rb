@@ -169,11 +169,8 @@ def player_numbers(team_name)
         team_data.each do |data, info|
           if data == :players
             info.each do |name, stats|
-              stats.each do |stat, value|
-                if stat == :number
-                  numbers << value
-                end
-              end
+              if stats[:number]
+                numbers << stats[:number]
             end
           end
         end
