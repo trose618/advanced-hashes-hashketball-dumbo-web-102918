@@ -179,6 +179,7 @@ end
 def player_stats(player_name)
   game_hash.find do |location, team_data|
     if team_data[:player][player_name]
+      binding.pry
       #team_data[:player][player_name]
     end
   end
