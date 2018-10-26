@@ -191,14 +191,14 @@ def big_shoe_rebounds
   big_foot_shoe_size = 0
   
   game_hash.each do |location, team_data|
-        team_data[:players].each do |player, stats|
-          array_of_player_stat_values = stats.values
-          if array_of_player_stat_values[1] > big_foot_shoe_size
-            big_foot_shoe_size = array_of_player_stat_values[1]
-            rebounds_of_big_foot = array_of_player_stat_values[3]
-          end
+    team_data[:players].each do |player, stats|
+      array_of_player_stat_values = stats.values
+        if array_of_player_stat_values[1] > big_foot_shoe_size
+          big_foot_shoe_size = array_of_player_stat_values[1]
+          rebounds_of_big_foot = array_of_player_stat_values[3]
         end
       end
+    end
   rebounds_of_big_foot
 end
 
